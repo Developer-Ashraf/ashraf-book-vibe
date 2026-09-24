@@ -11,8 +11,14 @@ interface IBookDetailPageProps {
 }
 
 const getBooks = async () => {
-    const res = await fetch('http://localhost:3000/booksData.json');
-    return res.json();
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/booksData.json`);
+        return res.json();
+    }catch(error){
+        console.error("Error fetching books data:", error);
+        return []
+    }
+   
 }
 
 const bookDetails = async ({ params }: IBookDetailPageProps) => {
@@ -55,8 +61,8 @@ const bookDetails = async ({ params }: IBookDetailPageProps) => {
                     <span className="font-bold text-black">Tag</span>
                     <div className="flex gap-2">
                         {book.tags?.map((tag, index) => (
-                            <span 
-                                key={index} 
+                            <span
+                                key={index}
                                 className="bg-emerald-50 text-emerald-500 font-semibold px-4 py-1.5 rounded-full text-sm"
                             >
                                 #{tag}
