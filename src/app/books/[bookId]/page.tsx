@@ -6,7 +6,7 @@ import React from 'react';
 
 interface IBookDetailPageProps {
     params: Promise<{
-        id: string;
+        bookId: string;
     }>
 }
 
